@@ -2,6 +2,8 @@
 .env
 __pycache__/
 *.pyc
+data.json
+settings_mysql.py
 db.sqlite3
 media/
 staticfiles/
