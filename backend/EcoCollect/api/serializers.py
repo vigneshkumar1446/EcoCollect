@@ -24,7 +24,7 @@ class PickupRequestSerializer(serializers.ModelSerializer):
     recycler_name=serializers.SerializerMethodField()
     recycler_id=serializers.SerializerMethodField()
     is_rated=serializers.SerializerMethodField()
-    # chatroom_id = serializers.SerializerMethodField()
+    chatroom_id = serializers.SerializerMethodField()
     # unread_count = serializers.SerializerMethodField()
     # assignment_id = serializers.SerializerMethodField()
 
@@ -51,11 +51,11 @@ class PickupRequestSerializer(serializers.ModelSerializer):
     def get_is_rated(self, obj):
         return Rating.objects.filter(pickup=obj).exists()
     
-    # def get_chatroom_id(self, obj):
-    #     room = Chatroom.objects.filter(pickup=obj).first()
-    #     if room:
-    #         return room.id
-    #     return None
+    def get_chatroom_id(self, obj):
+        room = Chatroom.objects.filter(pickup=obj).first()
+        if room:
+            return room.id
+        return None
     
     # def get_unread_count(self, obj):
     #     request = self.context.get("request")
