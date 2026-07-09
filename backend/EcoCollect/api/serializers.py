@@ -21,7 +21,7 @@ class WasteCategorySerializer(serializers.ModelSerializer):
 class PickupRequestSerializer(serializers.ModelSerializer):
 
 
-    # recycler_name=serializers.SerializerMethodField()
+    recycler_name=serializers.SerializerMethodField()
     # recycler_id=serializers.SerializerMethodField()
     # is_rated=serializers.SerializerMethodField()
     # chatroom_id = serializers.SerializerMethodField()
@@ -35,11 +35,11 @@ class PickupRequestSerializer(serializers.ModelSerializer):
 
     
 
-    # def get_recycler_name(self, obj):
-    #     assignment = obj.recyclerassignment_set.first()
-    #     if assignment:
-    #         return assignment.recycler.username
-    #     return None
+    def get_recycler_name(self, obj):
+        assignment = obj.recyclerassignment_set.first()
+        if assignment:
+            return assignment.recycler.username
+        return None
     
 
     # def get_recycler_id(self, obj):
