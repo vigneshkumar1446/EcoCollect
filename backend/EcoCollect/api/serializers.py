@@ -21,12 +21,12 @@ class WasteCategorySerializer(serializers.ModelSerializer):
 class PickupRequestSerializer(serializers.ModelSerializer):
 
 
-    recycler_name=serializers.SerializerMethodField()
-    recycler_id=serializers.SerializerMethodField()
-    is_rated=serializers.SerializerMethodField()
-    chatroom_id = serializers.SerializerMethodField()
-    unread_count = serializers.SerializerMethodField()
-    assignment_id = serializers.SerializerMethodField()
+    # recycler_name=serializers.SerializerMethodField()
+    # recycler_id=serializers.SerializerMethodField()
+    # is_rated=serializers.SerializerMethodField()
+    # chatroom_id = serializers.SerializerMethodField()
+    # unread_count = serializers.SerializerMethodField()
+    # assignment_id = serializers.SerializerMethodField()
 
     class Meta:
         model=PickupRequest
@@ -35,44 +35,44 @@ class PickupRequestSerializer(serializers.ModelSerializer):
 
     
 
-    def get_recycler_name(self, obj):
-        assignment = obj.recyclerassignment_set.first()
-        if assignment:
-            return assignment.recycler.username
-        return None
+    # def get_recycler_name(self, obj):
+    #     assignment = obj.recyclerassignment_set.first()
+    #     if assignment:
+    #         return assignment.recycler.username
+    #     return None
     
 
-    def get_recycler_id(self, obj):
-        assignment = obj.recyclerassignment_set.first()
-        if assignment:
-            return assignment.recycler.id
-        return None
+    # def get_recycler_id(self, obj):
+    #     assignment = obj.recyclerassignment_set.first()
+    #     if assignment:
+    #         return assignment.recycler.id
+    #     return None
 
-    def get_is_rated(self, obj):
-        return Rating.objects.filter(pickup=obj).exists()
+    # def get_is_rated(self, obj):
+    #     return Rating.objects.filter(pickup=obj).exists()
     
-    def get_chatroom_id(self, obj):
-        room = Chatroom.objects.filter(pickup=obj).first()
-        if room:
-            return room.id
-        return None
+    # def get_chatroom_id(self, obj):
+    #     room = Chatroom.objects.filter(pickup=obj).first()
+    #     if room:
+    #         return room.id
+    #     return None
     
-    def get_unread_count(self, obj):
-        request = self.context.get("request")
-        room = Chatroom.objects.filter(pickup=obj).first()
+    # def get_unread_count(self, obj):
+    #     request = self.context.get("request")
+    #     room = Chatroom.objects.filter(pickup=obj).first()
 
-        if not room or not request:
-            return 0
+    #     if not room or not request:
+    #         return 0
 
-        return Chatbox.objects.filter(room=room, is_read=False).exclude(sender=request.user).count()
-    def get_assignment_id(self, obj):
+    #     return Chatbox.objects.filter(room=room, is_read=False).exclude(sender=request.user).count()
+    # def get_assignment_id(self, obj):
 
-        assignment = obj.recyclerassignment_set.first()
+    #     assignment = obj.recyclerassignment_set.first()
 
-        if assignment:
-            return assignment.id
+    #     if assignment:
+    #         return assignment.id
 
-        return None
+    #     return None
     
     #validation 
     def validate_pickup_Date(self, value):
