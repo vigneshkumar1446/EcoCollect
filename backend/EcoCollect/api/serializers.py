@@ -26,7 +26,7 @@ class PickupRequestSerializer(serializers.ModelSerializer):
     is_rated=serializers.SerializerMethodField()
     chatroom_id = serializers.SerializerMethodField()
     unread_count = serializers.SerializerMethodField()
-    # assignment_id = serializers.SerializerMethodField()
+    assignment_id = serializers.SerializerMethodField()
 
     class Meta:
         model=PickupRequest
@@ -65,14 +65,14 @@ class PickupRequestSerializer(serializers.ModelSerializer):
             return 0
 
         return Chatbox.objects.filter(room=room, is_read=False).exclude(sender=request.user).count()
-    # def get_assignment_id(self, obj):
+    def get_assignment_id(self, obj):
 
-    #     assignment = obj.recyclerassignment_set.first()
+        assignment = obj.recyclerassignment_set.first()
 
-    #     if assignment:
-    #         return assignment.id
+        if assignment:
+            return assignment.id
 
-    #     return None
+        return None
     
     #validation 
     def validate_pickup_Date(self, value):
